@@ -4,7 +4,7 @@ A simple website that generates a password based on user's criteria.
 Link to deployment: 
 
 Screenshot:
-
+![Password Generator Screenshot](https://github.com/MwansaMwango/password-generator/blob/master/password-generator-GUI.JPG?raw=true)
 
 
 
