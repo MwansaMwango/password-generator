@@ -118,6 +118,46 @@ button[disabled] {
   overflow: hidden;
 }
 
+/* Form styling */
+
+input:invalid+span:after {
+  content: '✖';
+  color:red;
+  padding-left: 5px;
+}
+
+input:valid+span:after {
+  content: '✓';
+  color:green;
+  padding-left: 5px;
+}
+option:valid:after {
+  content: '✓';
+  color:  green;
+  padding-left: 5px;
+}
+option:invalid:after {
+  content: '✖';
+  color:red;
+  padding-left: 5px;
+}
+
+label {
+
+  font-size: 1rem;
+  padding-right: 10px;
+
+}
+
+select {
+    font-size: 0.9rem;
+    padding: 5px;
+    display: block;
+}
+
+
+/*Mediascreen responsive styling */
+
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;

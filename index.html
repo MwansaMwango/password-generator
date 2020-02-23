@@ -12,6 +12,49 @@
       <header>
         <h1>Password Generator</h1>
       </header>
+
+      <div class="card pwd-criteria">
+        <div class="card-header">
+          <h2>Enter password criteria</h2>
+        </div>
+        <div class="card-body">
+      
+        <form>
+          <!--Set password character length-->
+          <div>
+            <label for="pwdCharLength">Enter number of password characters (8 - 128):</label>
+            <input id="pwdCharLength" type="number" name="pwdCharLength" min="8" max ="128" value="8" required>
+            <span class="validity"></span>
+          </div>
+          
+          <!--Set password character types-->
+          <div class="site-charType">
+            <p>Enter type of characters for password:<span class="validity"></span></p>
+
+            <div>
+              <input name="lowercase" id="lowercase" type="checkbox" checked>
+              <label for="lowercase">Lowercase (a-z)</label>
+            </div>
+            <div>
+              <input name="uppercase" id="uppercase" type="checkbox" checked>
+              <label for="uppercase">Uppercase (A-Z)</label>
+            </div>
+            <div>
+              <input name="number" id="number" type="checkbox" checked>
+              <label for="number">Number (0-9)</label>
+            </div>
+            <div>
+              <input name="specialChar" id="specialChar" type="checkbox" checked>
+              <label for="specialChar">Special Charaters (!”#$%...)</label>
+            </div>
+       
+          </div>
+
+        </form>
+          
+        </div>
+      </div>
+      
       <div class="card">
         <div class="card-header">
           <h2>Generate a Password</h2>
