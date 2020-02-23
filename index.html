@@ -15,7 +15,7 @@
 
       <div class="card pwd-criteria">
         <div class="card-header">
-          <h2>Enter password criteria</h2>
+          <h2>Enter Password Criteria</h2>
         </div>
         <div class="card-body">
       
@@ -27,31 +27,30 @@
             <span class="validity"></span>
           </div>
           
-          <!--Set password character types-->
+          <!--Set type of characters for password-->
           <div class="site-charType">
-            <p>Enter type of characters for password:<span class="validity"></span></p>
+            <p>Enter type of characters for password (select at least one):</p>
 
             <div>
-              <input name="lowercase" id="lowercase" type="checkbox" checked>
+              <input name="lowercase" id="lowercase" type="checkbox">
               <label for="lowercase">Lowercase (a-z)</label>
             </div>
             <div>
-              <input name="uppercase" id="uppercase" type="checkbox" checked>
+              <input name="uppercase" id="uppercase" type="checkbox">
               <label for="uppercase">Uppercase (A-Z)</label>
             </div>
             <div>
-              <input name="number" id="number" type="checkbox" checked>
+              <input name="number" id="number" type="checkbox">
               <label for="number">Number (0-9)</label>
             </div>
             <div>
-              <input name="specialChar" id="specialChar" type="checkbox" checked>
-              <label for="specialChar">Special Charaters (!”#$%...)</label>
+              <input name="specialChar" id="specialChar" type="checkbox">
+                <label for="specialChar">Special Charaters (!”#$%.etc..)</label>
             </div>
-       
+        
           </div>
 
         </form>
-          
         </div>
       </div>
       
@@ -67,9 +66,11 @@
             aria-label="Generated Password"
           ></textarea>
         </div>
+
         <div class="card-footer">
           <button id="generate" class="btn">Generate Password</button>
         </div>
+
       </div>
     </div>
     <script src="script.js"></script>

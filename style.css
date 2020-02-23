@@ -131,16 +131,6 @@ input:valid+span:after {
   color:green;
   padding-left: 5px;
 }
-option:valid:after {
-  content: '✓';
-  color:  green;
-  padding-left: 5px;
-}
-option:invalid:after {
-  content: '✖';
-  color:red;
-  padding-left: 5px;
-}
 
 label {
 
