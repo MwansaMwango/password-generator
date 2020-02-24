@@ -38,7 +38,8 @@ function generatePassword() {
 
   // Data arrays for password characters
   var passwordChars = [];
-  var uppercaseChars = [ //Regex can be used as alternative
+  var uppercaseChars = [
+    //List of Uppercase alphabet. Regex can be used as alternative
     "A",
     "B",
     "C",
@@ -66,7 +67,8 @@ function generatePassword() {
     "Y",
     "Z"
   ];
-  var lowercaseChars = [ //Regex can be used as alternative
+  var lowercaseChars = [
+    // List of lowercase alphabet. Regex can be used as alternative
     "a",
     "b",
     "c",
@@ -94,7 +96,7 @@ function generatePassword() {
     "y",
     "z"
   ];
-  var numberDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]; //Regex can be used as alternative
+  var numberDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]; // List of possible digits. Regex can be used as alternative
   var specialCharsList = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"; //Special character list string
   var specialChars = [];
   specialChars = specialCharsList.split(""); //Convert special character string to array
@@ -104,48 +106,75 @@ function generatePassword() {
     //Check if password character length is between (7-129)
 
     if (pwdLowercase || pwdUppercase || pwdNumber || pwdSpecialChar) {
-      // Check if at least one checkbox is checked/true
-      alert("Ready to generate password. Please ensure you have privacy!");
-     
+      // Check if at least one checkbox is checked/true/1
+      console.log(
+        "Ready to generate password. Please ensure you have privacy!"
+      );
+
       //Code to generate password here
-      for (var i = 0; i < pwdCharLength; i++) {
-        //Iterate for each password character
-        var randomCharTypeIndex = Math.floor(Math.random() * charTypes.length); //Randomize type of character to be generated
-      
-        if (charTypes[randomCharTypeIndex] === "Lowercase") {
-          //Generate Lowercase character
+      do {
+        for (var i = 0; i < pwdCharLength; i++) {
+          //Iterate for each password character
+          var randomCharTypeIndex = Math.floor(
+            Math.random() * charTypes.length
+          ); //Randomize type of character to be generated based on types checked by user
 
-          var randomLowercaseCharIndex = Math.floor(
-            Math.random() * lowercaseChars.length
-          );
-          var randomLowercaseChar = lowercaseChars[randomLowercaseCharIndex];
-          passwordChars.push(randomLowercaseChar);
-        } else if (charTypes[randomCharTypeIndex] === "Uppercase") {
-          //Generate Uppecase character
+          if (charTypes[randomCharTypeIndex] === "Lowercase") {
+            // Generate Random Lowercase character
 
-          var randomUppercaseCharIndex = Math.floor(
-            Math.random() * uppercaseChars.length
-          );
-          var randomUppercaseChar = uppercaseChars[randomUppercaseCharIndex];
-          passwordChars.push(randomUppercaseChar);
-        } else if (charTypes[randomCharTypeIndex] === "Number") {
-          //Generate Number character
+            var randomLowercaseCharIndex = Math.floor(
+              Math.random() * lowercaseChars.length
+            );
+            var randomLowercaseChar = lowercaseChars[randomLowercaseCharIndex];
+            passwordChars.push(randomLowercaseChar);
+            var lowerCaseUsed = true; // Flag that lowercase character type criteria has been satisfied
+          } else if (charTypes[randomCharTypeIndex] === "Uppercase") {
+            // Generate Random Uppecase character
 
-          var randomNumCharIndex = Math.floor(
-            Math.random() * numberDigits.length
-          );
-          var randomNumChar = numberDigits[randomNumCharIndex];
-          passwordChars.push(randomNumChar);
-        } else if (charTypes[randomCharTypeIndex] === "Special") {
-          //Generate Special character
+            var randomUppercaseCharIndex = Math.floor(
+              Math.random() * uppercaseChars.length
+            );
+            var randomUppercaseChar = uppercaseChars[randomUppercaseCharIndex];
+            passwordChars.push(randomUppercaseChar);
+            var upperCaseUsed = true; // Flag that uppercase character type criteria has been satisfied
+          } else if (charTypes[randomCharTypeIndex] === "Number") {
+            // Generate Random Number character
 
-          var randomSpecialCharIndex = Math.floor(
-            Math.random() * specialChars.length
-          );
-          var randomSpecialChar = specialChars[randomSpecialCharIndex];
-          passwordChars.push(randomSpecialChar);
+            var randomNumCharIndex = Math.floor(
+              Math.random() * numberDigits.length
+            );
+            var randomNumChar = numberDigits[randomNumCharIndex];
+            passwordChars.push(randomNumChar);
+            var numUsed = true; // Flag that number character type criteria has been satisfied
+          } else if (charTypes[randomCharTypeIndex] === "Special") {
+            // Generate Random Special character
+
+            var randomSpecialCharIndex = Math.floor(
+              Math.random() * specialChars.length
+            );
+            var randomSpecialChar = specialChars[randomSpecialCharIndex];
+            passwordChars.push(randomSpecialChar);
+            var specialUsed = true; // Flag that special character type criteria has been satisfied
+          }
+        } // End of for loop
+
+        // Validate password against criteria
+        var pwdInvalid =
+          pwdLowercase ^ lowerCaseUsed ||
+          pwdUppercase ^ upperCaseUsed ||
+          pwdNumber ^ numUsed ||
+          pwdSpecialChar ^ specialUsed; // XOR returns "1" only when operands are different i.e. 1 OR 0. If invalid resolves to "1"
+        console.log(
+          pwdLowercase ^ lowerCaseUsed ||
+            pwdUppercase ^ upperCaseUsed ||
+            pwdNumber ^ numUsed ||
+            pwdSpecialChar ^ specialUsed
+        ); //Test output in console
+
+        if (pwdInvalid) {
+          passwordChars = []; // Clear password characters
         }
-      } // End of for loop
+      } while (pwdInvalid); // If password password is NOT valid i.e. ==="1" then re-execute do loop or re-generate password
     } else {
       alert("MUST select at least ONE character type for your password!");
     }
