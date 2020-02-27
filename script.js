@@ -1,16 +1,26 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
+var generateBtnEl = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
+  var passwordTextEl = document.querySelector("#password");
+  passwordTextEl.value = password;
+  passwordTextEl.addEventListener("click", copyPasswordtoClipboard); // Click in text area to copy password to clipboard
+}
 
-  passwordText.value = password;
+function copyPasswordtoClipboard() {
+  var el = document.createElement("textarea");
+  el.value = password; // set element to password
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand("copy");
+  document.body.removeChild(el);
+  alert("Password Copied to Clipboard");
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtnEl.addEventListener("click", writePassword);
 
 function generatePassword() {
   // Collect password criteria user inputs
@@ -38,66 +48,8 @@ function generatePassword() {
 
   // Data arrays for password characters
   var passwordChars = [];
-  var uppercaseChars = [
-    //List of Uppercase alphabet. Regex can be used as alternative
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z"
-  ];
-  var lowercaseChars = [
-    // List of lowercase alphabet. Regex can be used as alternative
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z"
-  ];
-  var numberDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]; // List of possible digits. Regex can be used as alternative
-  var specialCharsList = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"; //Special character list string
+  var numberDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]; // List of possible digits. Char codes can be used as alternative
+  var specialCharsList = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"; //Special character list string. Char codes can be used as alternative
   var specialChars = [];
   specialChars = specialCharsList.split(""); //Convert special character string to array
 
@@ -109,7 +61,7 @@ function generatePassword() {
       // Check if at least one checkbox is checked/true/1
       console.log(
         "Ready to generate password. Please ensure you have privacy!"
-      );
+      ); // Test output in console
 
       //Code to generate password here
       do {
@@ -123,18 +75,23 @@ function generatePassword() {
             // Generate Random Lowercase character
 
             var randomLowercaseCharIndex = Math.floor(
-              Math.random() * lowercaseChars.length
+              Math.random() * 26 // Generate random number from 0 to 25 (26 is not included!)
             );
-            var randomLowercaseChar = lowercaseChars[randomLowercaseCharIndex];
+
+            var randomLowercaseChar = String.fromCharCode(
+              randomLowercaseCharIndex + 97
+            ); // Character codes: 'a' = 97 to 'z' = 122.
             passwordChars.push(randomLowercaseChar);
             var lowerCaseUsed = true; // Flag that lowercase character type criteria has been satisfied
           } else if (charTypes[randomCharTypeIndex] === "Uppercase") {
             // Generate Random Uppecase character
 
             var randomUppercaseCharIndex = Math.floor(
-              Math.random() * uppercaseChars.length
+              Math.random() * 26 // Generate random number from 0 to 25 (26 is not included!)
             );
-            var randomUppercaseChar = uppercaseChars[randomUppercaseCharIndex];
+            var randomUppercaseChar = String.fromCharCode(
+              randomUppercaseCharIndex + 65
+            ); // Character codes: 'A' = 65 to 'Z' = 90.
             passwordChars.push(randomUppercaseChar);
             var upperCaseUsed = true; // Flag that uppercase character type criteria has been satisfied
           } else if (charTypes[randomCharTypeIndex] === "Number") {
@@ -158,12 +115,12 @@ function generatePassword() {
           }
         } // End of for loop
 
-        // Validate password against criteria
+        // Validate password against selected criteria
         var pwdInvalid =
           pwdLowercase ^ lowerCaseUsed ||
           pwdUppercase ^ upperCaseUsed ||
           pwdNumber ^ numUsed ||
-          pwdSpecialChar ^ specialUsed; // XOR returns "1" only when operands are different i.e. 1 OR 0. If invalid resolves to "1"
+          pwdSpecialChar ^ specialUsed; // XOR only returns "1" only when operands are different i.e. 1 OR 0. If invalid resolves to "1"
         console.log(
           pwdLowercase ^ lowerCaseUsed ||
             pwdUppercase ^ upperCaseUsed ||
@@ -172,15 +129,15 @@ function generatePassword() {
         ); //Test output in console
 
         if (pwdInvalid) {
-          passwordChars = []; // Clear password characters
+          passwordChars = []; // Clear current password characters if invalid
         }
-      } while (pwdInvalid); // If password password is NOT valid i.e. ==="1" then re-execute do loop or re-generate password
+      } while (pwdInvalid); // If password password is NOT valid i.e. ==="1" then re-execute do loop to re-generate new password. Loop until valid.
     } else {
       alert("MUST select at least ONE character type for your password!");
     }
   } else {
     alert("MUST be a whole number between 8 and 128 characters");
   }
-  password = passwordChars.join(""); // Cconvert array of password characters into string
+  password = passwordChars.join(""); // Convert array of password characters into string
   return password;
-} // Returns password
+} // Returns password string
