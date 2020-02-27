@@ -1,12 +1,11 @@
 # Password-generator
+
 A simple website that generates a password based on user's criteria.
 
-Link to deployment: 
+Link to deployment:  https://mwansamwango.github.io/password-generator
 
-Screenshot:
-![Password Generator Screenshot](https://github.com/MwansaMwango/password-generator/blob/master/password-generator-GUI.JPG?raw=true)
-
-
+## Demo
+![Password Generator Demo](https://github.com/MwansaMwango/password-generator/blob/master/Password-Generator.gif)
 
 ## User Story
 
